@@ -1,56 +1,84 @@
 <?php
-class Terreno {
-    public $frente;
-    public $lateral;
-    public $precoPorMetroQuadrado;
 
-    public function setFrente($valor) {
-        if ($valor < 0) {
-            $this->frente = 0;
-        } else {
-            $this->frente = $valor;
-        }
+class Terreno
+{
+    private $frente;
+    private $lateral;
+    private $precoMetro;
+
+    public function __construct($frente, $lateral, $preco)
+    {
+        $this->setFrente($frente);
+        $this->setLateral($lateral);
+        $this->setPreco($preco);
+        echo "Objeto criado<br>";
     }
 
-    public function setLateral($valor) {
-        if ($valor < 0) {
-            $this->lateral = 0;
-        } else {
-            $this->lateral = $valor;
-        }
-    }
-
-    public function setPreco($valor) {
-        if ($valor < 0) {
-            $this->precoPorMetroQuadrado = 0;
-        } else {
-            $this->precoPorMetroQuadrado = $valor;
-        }
-    }
-
-    public function perimetro() {
-        return 2 * ($this->frente + $this->lateral);
-    }
-
-    public function area() {
+    public function area()
+    {
         return $this->frente * $this->lateral;
     }
 
-    public function precoVenda() {
-        return $this->area() * $this->precoPorMetroQuadrado;
+    public function perimetro()
+    {
+        return ($this->frente * 2) + ($this->lateral * 2);
+    }
+
+    public function precoVenda()
+    {
+        return $this->area() * $this->precoMetro;
+    }
+
+    public function setFrente($valorFrente)
+    {
+        if ($valorFrente < 0) {
+            $this->frente = 0;
+        } else {
+            $this->frente = $valorFrente;
+        }
+    }
+
+    public function getFrente()
+    {
+        return $this->frente;
+    }
+
+    public function setLateral($valorLateral)
+    {
+        if ($valorLateral < 0) {
+            $this->lateral = 0;
+        } else {
+            $this->lateral = $valorLateral;
+        }
+    }
+
+    public function getLateral()
+    {
+        return $this->lateral;
+    }
+
+    public function setPreco($valorPreco)
+    {
+        if ($valorPreco < 0) {
+            $this->precoMetro = 0;
+        } else {
+            $this->precoMetro = $valorPreco;
+        }
+    }
+
+    public function getPreco()
+    {
+        return $this->precoMetro;
     }
 }
 
-    $terreno = new terreno();
-    $terreno->setFrente(16);
-    $terreno->setLateral(10);
-    $terreno->setPreco(100);
+$terreno1 = new Terreno(5, 30, 1000); #cria instancia do objeto
 
-    $perimetro = $terreno->perimetro();
-    echo "o perimetro é:" . $perimetro;
+echo "Frente do terreno: {$terreno1->getFrente()} metros <br>";
+echo "Área do terreno: {$terreno1->area()} <br>";
+echo "Perímetro do terreno: {$terreno1->perimetro()} <br>";
+echo "Preço de venda: {$terreno1->precoVenda()} <br>";
 
-    $area = $terreno->area();
-    echo "<br>a área é:" . $area;
+$terreno2 = new Terreno(10, 25, 1500);
 
-    $precoVenda = $terreno->precoVenda();
-    echo "<br>o preço é:". $precoVenda;
+?>
